@@ -1,4 +1,8 @@
+
 # Project specific ignores
+feature_selection/ 
+.idea
+*.h5
 *.mp4
 *.gif
 *.pdb
