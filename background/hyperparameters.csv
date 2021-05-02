@@ -9,7 +9,7 @@
 ,Computing_2019,Villin,coarse-graining,PCCA,,TRUE,FALSE,FALSE
 ,Data-drive2018,NTL9,feature,heavy-distances,,FALSE,TRUE,FALSE
 ,Data-drive2018,NTL9,markov lag time,10,ns,FALSE,TRUE,FALSE
-,A_Data-Dri2018,NTL9,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
+,A_Data-Dri2018,NTL9,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,NTL9,TICA lag,100,ns,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,NTL9,TICA scaling,commute-map,,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,NTL9,TICA m,50,,TRUE,FALSE,FALSE
@@ -17,7 +17,7 @@
 ,A_Data-Dri2018,NTL9,clustering n,1000,,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,NTL9,g,4,,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,NTL9,markov lag time,100,ns,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
+,A_Data-Dri2018,WW-domain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,WW-domain,TICA lag,40,,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,WW-domain,TICA scaling,commute-map,,TRUE,FALSE,FALSE
 ,A_Data-Dri2018,WW-domain,TICA m,50,,TRUE,FALSE,FALSE
@@ -60,7 +60,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Variationa2018,Villin,markov lag time,50,ns,TRUE,FALSE,TRUE
 ,Variationa2018,Villin,error method,bootstrapping,,TRUE,FALSE,TRUE
 ,Variationa2018,Villin,bootstrap samples,100,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,Chignolin,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,Chignolin,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Chignolin,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Chignolin,TICA m,,,TRUE,FALSE,TRUE
@@ -68,7 +68,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,Chignolin,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,Chignolin,clustering n,2000,,TRUE,FALSE,TRUE
 ,Quantitati2018,Chignolin,markov lag time,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,Trp-cage,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,Trp-cage,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Trp-cage,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Trp-cage,TICA m,,,TRUE,FALSE,TRUE
@@ -76,7 +76,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,Trp-cage,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,Trp-cage,clustering n,2000,,TRUE,FALSE,TRUE
 ,Quantitati2018,Trp-cage,markov lag time,200,ns,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,BBA,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,BBA,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,BBA,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,BBA,TICA m,,,TRUE,FALSE,TRUE
@@ -84,7 +84,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,BBA,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,BBA,clustering n,1000,,TRUE,FALSE,TRUE
 ,Quantitati2018,BBA,markov lag time,1,ns,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,WW-domain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,WW-domain,TICA stride,6,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,WW-domain,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,WW-domain,TICA m,,,TRUE,FALSE,TRUE
@@ -92,7 +92,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,WW-domain,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,WW-domain,clustering n,2000,,TRUE,FALSE,TRUE
 ,Quantitati2018,WW-domain,markov lag time,1,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,Protein B,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,Protein B,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Protein B,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Protein B,TICA m,,,TRUE,FALSE,TRUE
@@ -100,7 +100,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,Protein B,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,Protein B,clustering n,926,,TRUE,FALSE,TRUE
 ,Quantitati2018,Protein B,markov lag time,200,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,Homeodomain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,Homeodomain,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Homeodomain,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Homeodomain,TICA m,,,TRUE,FALSE,TRUE
@@ -108,7 +108,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,Homeodomain,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,Homeodomain,clustering n,1000,,TRUE,FALSE,TRUE
 ,Quantitati2018,Homeodomain,markov lag time,10,ns,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,feature,"closest-distances, closest-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
+,Quantitati2018,a3D,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
 ,Quantitati2018,a3D,TICA stride,0.2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,a3D,TICA lag,20,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,a3D,TICA m,,,TRUE,FALSE,TRUE
@@ -116,7 +116,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,Quantitati2018,a3D,clustering method,k-means,,TRUE,FALSE,TRUE
 ,Quantitati2018,a3D,clustering n,2000,,TRUE,FALSE,TRUE
 ,Quantitati2018,a3D,markov lag time,2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,feature,closest-distances,,TRUE,FALSE,TRUE
+,Quantitati2018,Lambda-repressor,feature,heavy-distances,,TRUE,FALSE,TRUE
 ,Quantitati2018,Lambda-repressor,TICA stride,2,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Lambda-repressor,TICA lag,100,ns,TRUE,FALSE,TRUE
 ,Quantitati2018,Lambda-repressor,TICA m,,,TRUE,FALSE,TRUE
