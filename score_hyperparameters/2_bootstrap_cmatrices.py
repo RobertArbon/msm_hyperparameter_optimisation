@@ -55,7 +55,9 @@ def estimate_cmatrices(trajs: List[np.ndarray]) -> Outputs:
     for lag in cons.LAGS:
         m = pm.msm.estimate_markov_model(trajs, lag=lag, reversible=True, connectivity='largest',
                                              mincount_connectivity="1/n")
-        cmats.append(m.count_matrix_active)
+        cmat = m.count_matrix_active
+        # logging.info(f"Estimated count matrix of size {cmat.shape} at lag {lag}")
+        cmats.append(cmat)
         lags.append(lag)
     return Outputs(count_matrices=cmats, lags=np.array(lags))
 
@@ -66,13 +68,13 @@ def get_sub_dict(hp_dict: Dict[str, List[Union[str, int]]], name: str) -> Mappin
 
 
 def discretize_trajectories(hp_dict: Dict[str, List[Union[str, int]]], trajs: List[np.ndarray]) -> List[np.ndarray]:
-    print(get_sub_dict(hp_dict, 'tica'))
-    print(get_sub_dict(hp_dict, 'cluster'))
     tica = pm.coordinates.tica(trajs, **get_sub_dict(hp_dict, 'tica'))
-    print(tica)
+    # # logging.info(f"Estimated tica")
+    # logging.info(tica)
     y = tica.get_output()
     kmeans = pm.coordinates.cluster_kmeans(y, **get_sub_dict(hp_dict, 'cluster'))
-    print(kmeans)
+    # logging.info(f"Estimated kmeans")
+    # logging.info(kmeans)
     z = kmeans.dtrajs
     z = [x.flatten() for x in z]
     return z
@@ -85,11 +87,12 @@ def get_probabilities(trajs: List[np.ndarray]) -> np.ndarray:
 
 
 def sample_trajectories(trajs: List[np.ndarray]) -> List[np.ndarray]:
-    ix = np.arange(len(trajs))
-    probs = get_probabilities(trajs)
-    sample_ix = np.random.choice(ix, size=ix.shape[0], p=probs, replace=True)
-    sampled_trajs = [trajs[i] for i in sample_ix]
-    return sampled_trajs
+    # ix = np.arange(len(trajs))
+    # probs = get_probabilities(trajs)
+    # sample_ix = np.random.choice(ix, size=ix.shape[0], p=probs, replace=True)
+    # sampled_trajs = [trajs[i] for i in sample_ix]
+    # return sampled_trajs
+    return trajs
 
 
 def add_features(hp_dict: Dict[str, List[Union[str, int]]], reader: DataSource ) -> DataSource:
@@ -107,12 +110,13 @@ def create_reader(traj_top_paths):
     trajs = [str(x) for x in traj_top_paths['trajs']]
     top = str(traj_top_paths['top'])
     reader = pm.coordinates.source(trajs, top=top)
-    logging.info("Reader created. Description:")
-    logging.info(f"{reader.describe()}")
+    # logging.info("Reader created. Description:")
+    # logging.info(f"{reader.describe()}")
     return reader
 
 
 def do_bootstrap(args):
+    # logging.info('in bootstrap')
     hp_dict, traj_top_paths, bs_dir, bs_num = args
     reader = create_reader(traj_top_paths)
     reader = add_features(hp_dict, reader)
@@ -123,6 +127,7 @@ def do_bootstrap(args):
     outputs.hp = hp_dict
     outputs.sample_ix = bs_num
     write_matrices(outputs, bs_dir)
+    return bs_num
 
 
 def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]],
@@ -136,16 +141,18 @@ def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]
     bs_dir = output_dir.joinpath(f"hp_{str(hp_idx)}")
     bs_dir.mkdir(exist_ok=True)
 
-    n_workers = cpu_count()
+    n_workers = min(cpu_count(), cons.BS_SAMPLES)
     args_list = [(hp_dict, traj_top_paths, bs_dir, i) for i in range(cons.BS_SAMPLES)]
-
+    logging.info(f"Bootstrapping hyper-parameter index value {hp_idx}")
+    logging.info(f'Launching {cons.BS_SAMPLES} jobs on {n_workers} cores')
     with Pool(n_workers) as pool:
-        pool.imap_unordered(do_bootstrap, args_list)
+        for i in pool.imap_unordered(do_bootstrap, args_list):
+            logging.info(f'Finished bootstrap sample {i}')
 
 
 def get_input_trajs_top() -> Dict[str, List[Path]]:
     glob_str = cons.INPUT_TRAJ_GLOB
-    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))[:10]
+    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))
     top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
     trajs.sort()
     assert trajs, 'no trajectories found'
@@ -169,6 +176,7 @@ def get_hyperparameters(path: str) -> pd.DataFrame:
 
 def setup_logger(out_dir: Path) -> None:
     logging.basicConfig(filename=str(out_dir.joinpath(f"{cons.NAME}.log")),
+                        filemode='w',
                         level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 

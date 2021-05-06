@@ -4,8 +4,8 @@ import numpy as np
 #
 NAME = '1FME'
 INPUT_TRAJ_GLOB = 'Volumes/REA/MD/12FF/DESRES-Trajectory_1FME-*-protein/1FME-*-protein'
-NUM_TRIALS = 5
-BS_SAMPLES = 2
+NUM_TRIALS = 2
+BS_SAMPLES = 1
 
 #
 # HYPER-PARAMETERS
