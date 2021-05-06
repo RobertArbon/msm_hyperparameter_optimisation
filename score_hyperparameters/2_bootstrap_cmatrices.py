@@ -1,73 +1,156 @@
 """
 for a system (e.g., protein) saves features.
 """
-from typing import Dict, List, Mapping
+from typing import Dict, List, Mapping, Tuple, Hashable, Optional, Union
 from pathlib import Path
+from dataclasses import dataclass
+import pickle
+import logging
+from multiprocessing import cpu_count, Pool
 
 import pandas as pd
+import numpy as np
+import pyemma as pm
+from pyemma.coordinates.data._base.datasource import DataSource
 
 import setup as cons
-from featurizers import *
+from featurizers import add_phipsi_dihdedrals, add_contacts
+#
+# def create_name(hp: Mapping) -> str:
+#     feature_keys = [x for x in hp.keys() if x.startswith('feature')]
+#     fname_list = []
+#     for key in feature_keys:
+#         elements = key.split('__')
+#         if 'value' == elements[1] or hp['feature__value'] == elements[1]:
+#             fname_list.append(f"{hp[key]}")
+#     name = f"{'_'.join(fname_list)}.h5"
+#     return name
+#
+# def filter_unique_hps(df: pd.DataFrame) -> pd.DataFrame:
+#     unique_ixs = []
+#     unique_names = []
+#     for i, row in df.iterrows():
+#         name = create_name(row.to_dict(into=dict))
+#         if not name in unique_names:
+#             unique_names.append(name)
+#             unique_ixs.append(i)
+#     return df.iloc[unique_ixs, :]
+
+@dataclass
+class Outputs:
+    count_matrices: List[np.ndarray]
+    lags: np.ndarray
+    sample_ix: Optional[int] = None
+    hp: Optional[Dict[str, Union[str, int]]] = None
 
 
-def get_input_trajs_top() -> Dict[str, List[Path]]:
-    glob_str = cons.INPUT_TRAJ_GLOB
-    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))
-    top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
-    trajs.sort()
-    assert trajs, 'no trajectories found'
-    assert top, 'no topology found'
-    return {'top': top, 'trajs': trajs}
+def write_matrices(outputs: Outputs, out_dir: Path) -> None:
+    file = out_dir.joinpath(f"{outputs.sample_ix}.p")
+    pickle.dump(obj=outputs, file=file.open('wb'))
 
 
-def get_hyperparameters(path: str) -> pd.DataFrame:
-    hps = pd.read_hdf(path)
-    return hps
+def estimate_cmatrices(trajs: List[np.ndarray]) -> Outputs:
+    cmats = []
+    lags = []
+    for lag in cons.LAGS:
+        m = pm.msm.estimate_markov_model(trajs, lag=lag, reversible=True, connectivity='largest',
+                                             mincount_connectivity="1/n")
+        cmats.append(m.count_matrix_active)
+        lags.append(lag)
+    return Outputs(count_matrices=cmats, lags=np.array(lags))
 
 
-def create_reader(traj_top_paths):
-    trajs = [str(x) for x in traj_top_paths['trajs']]
-    top = str(traj_top_paths['top'])
-    reader = pyemma.coordinates.source(trajs, top=top)
-    return reader
+def get_sub_dict(hp_dict: Dict[str, List[Union[str, int]]], name: str) -> Mapping:
+    sub_dict = {k.split('__')[1]: v for k, v in hp_dict.items() if k.startswith(name)}
+    return sub_dict
 
 
-def create_name(hp: Mapping) -> str:
-    feature_keys = [x for x in hp.keys() if x.startswith('feature')]
-    fname_list = []
-    for key in feature_keys:
-        elements = key.split('__')
-        if 'value' == elements[1] or hp['feature__value'] == elements[1]:
-            fname_list.append(f"{hp[key]}")
-    name = f"{'_'.join(fname_list)}.h5"
-    return name
+def discretize_trajectories(hp_dict: Dict[str, List[Union[str, int]]], trajs: List[np.ndarray]) -> List[np.ndarray]:
+    print(get_sub_dict(hp_dict, 'tica'))
+    print(get_sub_dict(hp_dict, 'cluster'))
+    tica = pm.coordinates.tica(trajs, **get_sub_dict(hp_dict, 'tica'))
+    print(tica)
+    y = tica.get_output()
+    kmeans = pm.coordinates.cluster_kmeans(y, **get_sub_dict(hp_dict, 'cluster'))
+    print(kmeans)
+    z = kmeans.dtrajs
+    z = [x.flatten() for x in z]
+    return z
 
 
-def create_features(hp_dict: Mapping, traj_top_paths: Dict[str, List[Path]], output_path: Path) -> None:
-    feature_name = create_name(hp_dict)
-    feature_path = output_path.joinpath(feature_name)
-    reader = create_reader(traj_top_paths)
+def get_probabilities(trajs: List[np.ndarray]) -> np.ndarray:
+    lengths = np.array([x.shape[0] for x in trajs])
+    probs = lengths/np.sum(lengths)
+    return probs
 
+
+def sample_trajectories(trajs: List[np.ndarray]) -> List[np.ndarray]:
+    ix = np.arange(len(trajs))
+    probs = get_probabilities(trajs)
+    sample_ix = np.random.choice(ix, size=ix.shape[0], p=probs, replace=True)
+    sampled_trajs = [trajs[i] for i in sample_ix]
+    return sampled_trajs
+
+
+def add_features(hp_dict: Dict[str, List[Union[str, int]]], reader: DataSource ) -> DataSource:
+    # This needs to take a reader for the custom features, as they need access to the files, not just the featurizer.
     feature = hp_dict['feature__value']
     if feature == 'phipsi_dihedrals':
         reader = add_phipsi_dihdedrals(reader)
     elif feature == 'contacts':
         cutoff = float(hp_dict['feature__contacts__center']*cons.UNITS['feature__contacts__center'])
         reader = add_contacts(reader, cutoff=cutoff)
-
-    reader.write_to_hdf5(str(feature_path), group=feature,  overwrite=True,
-                      stride=cons.STRIDE, chunksize=1000)
+    return reader
 
 
-def filter_unique_hps(df: pd.DataFrame) -> pd.DataFrame:
-    unique_ixs = []
-    unique_names = []
-    for i, row in df.iterrows():
-        name = create_name(row.to_dict(into=dict))
-        if not name in unique_names:
-            unique_names.append(name)
-            unique_ixs.append(i)
-    return df.iloc[unique_ixs, :]
+def create_reader(traj_top_paths):
+    trajs = [str(x) for x in traj_top_paths['trajs']]
+    top = str(traj_top_paths['top'])
+    reader = pm.coordinates.source(trajs, top=top)
+    logging.info("Reader created. Description:")
+    logging.info(f"{reader.describe()}")
+    return reader
+
+
+def do_bootstrap(args):
+    hp_dict, traj_top_paths, bs_dir, bs_num = args
+    reader = create_reader(traj_top_paths)
+    reader = add_features(hp_dict, reader)
+    feat_trajs = reader.get_output()
+    feat_trajs = sample_trajectories(feat_trajs)
+    disc_trajs = discretize_trajectories(hp_dict, feat_trajs)
+    outputs = estimate_cmatrices(disc_trajs)
+    outputs.hp = hp_dict
+    outputs.sample_ix = bs_num
+    write_matrices(outputs, bs_dir)
+
+
+def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]],
+                             traj_top_paths: Dict[str, List[Path]],
+                             output_dir: Path) -> None:
+    """ Bootstraps the count matrices at a series of lag times.
+    """
+    hp_idx = config[0]
+    hp_dict = config[1]
+
+    bs_dir = output_dir.joinpath(f"hp_{str(hp_idx)}")
+    bs_dir.mkdir(exist_ok=True)
+
+    n_workers = cpu_count()
+    args_list = [(hp_dict, traj_top_paths, bs_dir, i) for i in range(cons.BS_SAMPLES)]
+
+    with Pool(n_workers) as pool:
+        pool.imap_unordered(do_bootstrap, args_list)
+
+
+def get_input_trajs_top() -> Dict[str, List[Path]]:
+    glob_str = cons.INPUT_TRAJ_GLOB
+    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))[:10]
+    top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
+    trajs.sort()
+    assert trajs, 'no trajectories found'
+    assert top, 'no topology found'
+    return {'top': top, 'trajs': trajs}
 
 
 def create_ouput_directory() -> Path:
@@ -76,21 +159,31 @@ def create_ouput_directory() -> Path:
     return path
 
 
-def estimate_count_matrices(hp: Mapping, traj_top_paths: Dict[str, List[Path]], output_dir: Path) -> None:
-    pass
+def get_hyperparameters(path: str) -> pd.DataFrame:
+    hps = pd.read_hdf(path)
+    logging.info(f"Hyper-parameter samples read from {str(path)}")
+    logging.info(f"Hyper-parameter samples shape: {hps.shape}")
+    logging.info(f"{hps.head()}")
+    return hps
 
 
+def setup_logger(out_dir: Path) -> None:
+    logging.basicConfig(filename=str(out_dir.joinpath(f"{cons.NAME}.log")),
+                        level=logging.INFO,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 def main(hp_path: str) -> None:
-    hps = get_hyperparameters(hp_path)
     output_dir = create_ouput_directory()
+    setup_logger(output_dir)
+    hps = get_hyperparameters(hp_path)
     traj_top_paths = get_input_trajs_top()
-    unique_hps = filter_unique_hps(hps)
 
-    for i, row in unique_hps.iterrows():
-        estimate_count_matrices(row.to_dict(), traj_top_paths, output_dir)
-        # create_features(row.to_dict(into=dict), traj_top_paths, output_dir)
+    for i, row in hps.iterrows():
+        # Making an explicit dict and str variable so that type hinting is explicit.
+        hp = {k: v for k, v in row.to_dict().items()}
+        ix = str(i)
+        bootstrap_count_matrices((ix, hp), traj_top_paths, output_dir)
 
 
 if __name__ == '__main__':
