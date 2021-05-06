@@ -7,7 +7,7 @@ from typing import Dict, Union, List
 import numpy as np
 import pandas as pd
 
-import constants as cons
+import setup as cons
 
 np.random.seed(149817)
 
@@ -27,7 +27,7 @@ def sample_hps(hp_space: Dict[str, List[Union[int, str]]]) -> Dict[str, Union[in
 def build_hp_sample() -> pd.DataFrame:
     hps = {k: [] for k in cons.HP_SPACE.keys()}
 
-    for i in range(cons.NUM_HPS):
+    for i in range(cons.NUM_TRIALS):
         tmp = sample_hps(cons.HP_SPACE)
         for k in hps.keys():
             hps[k].append(tmp[k])
@@ -37,8 +37,7 @@ def build_hp_sample() -> pd.DataFrame:
 
 
 def save_sample(df: pd.DataFrame) -> None:
-    out_dir = Path(cons.NAME)
-    out_dir.mkdir(exist_ok=True)
+    out_dir = Path('./')
     df.to_hdf(out_dir.joinpath('hp_sample.h5'), key='hyperparameters')
 
 

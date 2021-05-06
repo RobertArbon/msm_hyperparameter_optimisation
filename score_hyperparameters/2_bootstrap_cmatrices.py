@@ -1,18 +1,17 @@
 """
 for a system (e.g., protein) saves features.
 """
-from typing import Dict, List, Optional
+from typing import Dict, List, Mapping
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
-import pyemma
-import mdtraj as md
 
-import constants as cons
+import setup as cons
+from featurizers import *
 
 
-def get_input_trajs_top(glob_str: str) -> Dict[str, List[Path]]:
+def get_input_trajs_top() -> Dict[str, List[Path]]:
+    glob_str = cons.INPUT_TRAJ_GLOB
     trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))
     top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
     trajs.sort()
@@ -29,11 +28,11 @@ def get_hyperparameters(path: str) -> pd.DataFrame:
 def create_reader(traj_top_paths):
     trajs = [str(x) for x in traj_top_paths['trajs']]
     top = str(traj_top_paths['top'])
-    reader = pyemma.coordinates.source(trajs[:10], top=top)
+    reader = pyemma.coordinates.source(trajs, top=top)
     return reader
 
 
-def create_name(hp: Dict) -> str:
+def create_name(hp: Mapping) -> str:
     feature_keys = [x for x in hp.keys() if x.startswith('feature')]
     fname_list = []
     for key in feature_keys:
@@ -44,30 +43,7 @@ def create_name(hp: Dict) -> str:
     return name
 
 
-def add_phipsi_dihdedrals(reader: pyemma.coordinates.source) -> pyemma.coordinates.source:
-    reader.featurizer.add_backbone_torsions(cossin=True)
-    return reader
-
-
-def num_contacts(reader: pyemma.coordinates.source) -> int:
-    traj = md.load_frame(reader.filenames[0], top=reader.featurizer.topology, index=0)
-    _, ix = md.compute_contacts(traj, contacts='all')
-    return ix.shape[0]
-
-
-def add_contacts(reader: pyemma.coordinates.source, cutoff: float, scheme: Optional[str] = 'closest-heavy') -> pyemma.coordinates.source:
-    dim = num_contacts(reader)
-
-    def _contacts(traj):
-        feat, ix = md.compute_contacts(traj, contacts='all', scheme=scheme)
-        feat = ((feat <= cutoff)*1).astype(np.float32)
-        return feat
-
-    reader.featurizer.add_custom_func(_contacts, dim=dim)
-    return reader
-
-
-def create_features(hp_dict: Dict, traj_top_paths: Dict[str, Path], output_path: Path) -> None:
+def create_features(hp_dict: Mapping, traj_top_paths: Dict[str, List[Path]], output_path: Path) -> None:
     feature_name = create_name(hp_dict)
     feature_path = output_path.joinpath(feature_name)
     reader = create_reader(traj_top_paths)
@@ -79,8 +55,8 @@ def create_features(hp_dict: Dict, traj_top_paths: Dict[str, Path], output_path:
         cutoff = float(hp_dict['feature__contacts__center']*cons.UNITS['feature__contacts__center'])
         reader = add_contacts(reader, cutoff=cutoff)
 
-    reader.write_to_hdf5(str(feature_path), group=feature_name,  overwrite=True,
-                      stride=cons.STRIDE, chunksize=1000, h5_opt=dict(compression=32001, chunks=True, shuffle=True))
+    reader.write_to_hdf5(str(feature_path), group=feature,  overwrite=True,
+                      stride=cons.STRIDE, chunksize=1000)
 
 
 def filter_unique_hps(df: pd.DataFrame) -> pd.DataFrame:
@@ -94,10 +70,28 @@ def filter_unique_hps(df: pd.DataFrame) -> pd.DataFrame:
     return df.iloc[unique_ixs, :]
 
 
-if __name__ == '__main__':
-    hps = get_hyperparameters(Path(cons.NAME).joinpath('hp_sample.h5'))
-    traj_top_paths = get_input_trajs_top(cons.INPUT_TRAJ_GLOB)
-    unique_hps = filter_unique_hps(hps)
-    for i, row in unique_hps.iterrows():
-        create_features(row.to_dict(into=dict), traj_top_paths, Path(cons.NAME))
+def create_ouput_directory() -> Path:
+    path = Path(cons.NAME)
+    path.mkdir(exist_ok=True)
+    return path
 
+
+def estimate_count_matrices(hp: Mapping, traj_top_paths: Dict[str, List[Path]], output_dir: Path) -> None:
+    pass
+
+
+
+
+def main(hp_path: str) -> None:
+    hps = get_hyperparameters(hp_path)
+    output_dir = create_ouput_directory()
+    traj_top_paths = get_input_trajs_top()
+    unique_hps = filter_unique_hps(hps)
+
+    for i, row in unique_hps.iterrows():
+        estimate_count_matrices(row.to_dict(), traj_top_paths, output_dir)
+        # create_features(row.to_dict(into=dict), traj_top_paths, output_dir)
+
+
+if __name__ == '__main__':
+    main('./hp_sample.h5')
