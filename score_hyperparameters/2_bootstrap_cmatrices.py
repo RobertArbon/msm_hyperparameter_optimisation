@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import pickle
 import logging
 from multiprocessing import cpu_count, Pool
+from functools import partial
 
 import pandas as pd
 import numpy as np
@@ -44,8 +45,10 @@ class Outputs:
     hp: Optional[Dict[str, Union[str, int]]] = None
 
 
-def write_matrices(outputs: Outputs, out_dir: Path) -> None:
-    file = out_dir.joinpath(f"{outputs.sample_ix}.p")
+def write_matrices(outputs: Outputs, out_dir: Path,
+                   sample_ix: int) -> None:
+    outputs.sample_ix = sample_ix
+    file = out_dir.joinpath(f"{outputs.sample_ix}.pkl")
     pickle.dump(obj=outputs, file=file.open('wb'))
 
 
@@ -115,19 +118,21 @@ def create_reader(traj_top_paths):
     return reader
 
 
-def do_bootstrap(args):
+def do_bootstrap(hp_dict, feat_trajs):
     # logging.info('in bootstrap')
-    hp_dict, traj_top_paths, bs_dir, bs_num = args
-    reader = create_reader(traj_top_paths)
-    reader = add_features(hp_dict, reader)
-    feat_trajs = reader.get_output()
     feat_trajs = sample_trajectories(feat_trajs)
     disc_trajs = discretize_trajectories(hp_dict, feat_trajs)
     outputs = estimate_cmatrices(disc_trajs)
     outputs.hp = hp_dict
-    outputs.sample_ix = bs_num
-    write_matrices(outputs, bs_dir)
-    return bs_num
+    return outputs
+
+
+def get_feature_trajs(traj_top_paths: Dict[str, List[Path]],hp_dict: Dict[str, List[Union[str, int]]]) -> List[np.ndarray]:
+    reader = create_reader(traj_top_paths)
+    reader = add_features(hp_dict, reader)
+    logging.info(f"Added features")
+    trajs = reader.get_output()
+    return trajs
 
 
 def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]],
@@ -135,24 +140,34 @@ def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]
                              output_dir: Path) -> None:
     """ Bootstraps the count matrices at a series of lag times.
     """
-    hp_idx = config[0]
-    hp_dict = config[1]
+    hp_idx, hp_dict = config
 
     bs_dir = output_dir.joinpath(f"hp_{str(hp_idx)}")
     bs_dir.mkdir(exist_ok=True)
 
+    ftrajs = get_feature_trajs(traj_top_paths, hp_dict)
+
     n_workers = min(cpu_count(), cons.BS_SAMPLES)
-    args_list = [(hp_dict, traj_top_paths, bs_dir, i) for i in range(cons.BS_SAMPLES)]
+    pool = Pool(n_workers)
     logging.info(f"Bootstrapping hyper-parameter index value {hp_idx}")
     logging.info(f'Launching {cons.BS_SAMPLES} jobs on {n_workers} cores')
-    with Pool(n_workers) as pool:
-        for i in pool.imap_unordered(do_bootstrap, args_list):
-            logging.info(f'Finished bootstrap sample {i}')
+
+    results = []
+    for i in range(cons.BS_SAMPLES):
+        write_output = partial(write_matrices, sample_ix=i, out_dir=bs_dir)
+        results.append(pool.apply_async(func=do_bootstrap, args=(hp_dict, ftrajs), callback=write_output))
+
+    for r in results:
+        r.get()
+
+    pool.close()
+    pool.join()
+    logging.info(f'Finished boostrap hp_ix: {hp_idx}')
 
 
 def get_input_trajs_top() -> Dict[str, List[Path]]:
     glob_str = cons.INPUT_TRAJ_GLOB
-    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))
+    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))[:10]
     top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
     trajs.sort()
     assert trajs, 'no trajectories found'
