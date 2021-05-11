@@ -1,7 +1,7 @@
 """
 for a system (e.g., protein) saves features.
 """
-from typing import Dict, List, Mapping, Tuple, Hashable, Optional, Union
+from typing import Dict, List, Mapping, Tuple, Optional, Union
 from pathlib import Path
 from dataclasses import dataclass
 import pickle
@@ -13,9 +13,10 @@ import pandas as pd
 import numpy as np
 import pyemma as pm
 from pyemma.coordinates.data._base.datasource import DataSource
+import mdtraj as md
 
 import setup as cons
-from featurizers import add_phipsi_dihdedrals, add_contacts
+from score_hyperparameters.featurizers import distances, dihedrals
 #
 # def create_name(hp: Mapping) -> str:
 #     feature_keys = [x for x in hp.keys() if x.startswith('feature')]
@@ -49,7 +50,11 @@ def write_matrices(outputs: Outputs, out_dir: Path,
                    sample_ix: int) -> None:
     outputs.sample_ix = sample_ix
     file = out_dir.joinpath(f"{outputs.sample_ix}.pkl")
-    pickle.dump(obj=outputs, file=file.open('wb'))
+    d_outputs = {'count_matrices': outputs.count_matrices,
+                 'lags': outputs.lags,
+                 'sample_ix': outputs.sample_ix,
+                 'hp': outputs.hp}
+    pickle.dump(obj=d_outputs, file=file.open('wb'))
 
 
 def estimate_cmatrices(trajs: List[np.ndarray]) -> Outputs:
@@ -75,7 +80,7 @@ def discretize_trajectories(hp_dict: Dict[str, List[Union[str, int]]], trajs: Li
     # # logging.info(f"Estimated tica")
     # logging.info(tica)
     y = tica.get_output()
-    kmeans = pm.coordinates.cluster_kmeans(y, **get_sub_dict(hp_dict, 'cluster'))
+    kmeans = pm.coordinates.cluster_kmeans(y, **get_sub_dict(hp_dict, 'cluster'), fixed_seed=2934798)
     # logging.info(f"Estimated kmeans")
     # logging.info(kmeans)
     z = kmeans.dtrajs
@@ -98,27 +103,25 @@ def sample_trajectories(trajs: List[np.ndarray]) -> List[np.ndarray]:
     return trajs
 
 
-def add_features(hp_dict: Dict[str, List[Union[str, int]]], reader: DataSource ) -> DataSource:
-    # This needs to take a reader for the custom features, as they need access to the files, not just the featurizer.
+def create_features(hp_dict: Dict[str, List[Union[str, int]]], trajs: List[md.Trajectory]) -> List[np.ndarray]:
     feature = hp_dict['feature__value']
-    if feature == 'phipsi_dihedrals':
-        reader = add_phipsi_dihdedrals(reader)
-    elif feature == 'contacts':
-        cutoff = float(hp_dict['feature__contacts__center']*cons.UNITS['feature__contacts__center'])
-        reader = add_contacts(reader, cutoff=cutoff)
-    return reader
+    if feature == 'dihedrals':
+        feat_trajs = dihedrals(trajs=trajs, **get_sub_dict(hp_dict, 'dihedrals'))
+    elif feature == 'distances':
+        feat_trajs = distances(trajs=trajs, **get_sub_dict(hp_dict, 'distances'))
+    else:
+        raise RuntimeError('Feature not recognized')
+    return feat_trajs
 
 
-def create_reader(traj_top_paths):
-    trajs = [str(x) for x in traj_top_paths['trajs']]
+def get_trajs(traj_top_paths: Dict[str, List[Path]]) -> List[md.Trajectory]:
+    traj_paths = [str(x) for x in traj_top_paths['trajs']]
     top = str(traj_top_paths['top'])
-    reader = pm.coordinates.source(trajs, top=top)
-    # logging.info("Reader created. Description:")
-    # logging.info(f"{reader.describe()}")
-    return reader
+    trajs = [md.load(x, top=top) for x in traj_paths]
+    return trajs
 
 
-def do_bootstrap(hp_dict, feat_trajs):
+def do_bootstrap(hp_dict: Dict[str, List[Union[str, int]]], feat_trajs: List[np.ndarray]):
     # logging.info('in bootstrap')
     feat_trajs = sample_trajectories(feat_trajs)
     disc_trajs = discretize_trajectories(hp_dict, feat_trajs)
@@ -128,11 +131,10 @@ def do_bootstrap(hp_dict, feat_trajs):
 
 
 def get_feature_trajs(traj_top_paths: Dict[str, List[Path]],hp_dict: Dict[str, List[Union[str, int]]]) -> List[np.ndarray]:
-    reader = create_reader(traj_top_paths)
-    reader = add_features(hp_dict, reader)
+    trajs = get_trajs(traj_top_paths)
+    feat_trajs = create_features(hp_dict, trajs)
     logging.info(f"Added features")
-    trajs = reader.get_output()
-    return trajs
+    return feat_trajs
 
 
 def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]],
@@ -167,7 +169,7 @@ def bootstrap_count_matrices(config: Tuple[str, Dict[str, List[Union[str, int]]]
 
 def get_input_trajs_top() -> Dict[str, List[Path]]:
     glob_str = cons.INPUT_TRAJ_GLOB
-    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))[:10]
+    trajs = list(Path('/').glob(f"{glob_str}/*.xtc"))
     top = list(Path('/').glob(f"{glob_str}/*.pdb"))[0]
     trajs.sort()
     assert trajs, 'no trajectories found'
@@ -211,3 +213,5 @@ def main(hp_path: str) -> None:
 
 if __name__ == '__main__':
     main('./hp_sample.h5')
+
+pm.msm.its
