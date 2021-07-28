@@ -8,6 +8,7 @@ feature_selection/
 *.pdb
 *.xtc
 *.npy
+*.pkl
 *.pdf
 
 # Byte-compiled / optimized / DLL files
