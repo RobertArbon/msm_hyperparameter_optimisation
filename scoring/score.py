@@ -66,7 +66,6 @@ if __name__=='__main__':
 	vamp_iter_values = np.empty((num_iters, num_lags, num_vamp_methods, num_vamp_ks))
 	
 	for bs_idx in range(num_iters):
-	    print(bs_idx, end=', ')
 	    results = bs_results[bs_idx]
 	    lags = results['lags']
 	    for lag_idx in range(len(lags)):
