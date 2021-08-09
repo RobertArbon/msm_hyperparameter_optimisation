@@ -41,7 +41,7 @@
 ,Examining_2018,Villin,TICA m,10,,TRUE,FALSE,FALSE
 ,Examining_2018,Villin,clustering method,k-means,,TRUE,FALSE,FALSE
 ,Examining_2018,Villin,clustering n,500,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,markov lag time,,,TRUE,FALSE,FALSE
+,Examining_2018,Villin,markov lag time,50,ns,TRUE,FALSE,FALSE
 ,Examining_2018,Villin,TICA lag,,,TRUE,FALSE,FALSE
 ,Examining_2018,Villin,TICA scaling,,,TRUE,FALSE,FALSE
 Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
@@ -50,7 +50,7 @@ Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
 ,HTMD:_High2016,Villin,TICA scaling,,,TRUE,FALSE,FALSE
 ,HTMD:_High2016,Villin,clustering method,minibatch k-means,,TRUE,FALSE,FALSE
 ,HTMD:_High2016,Villin,clustering n,1000,ns,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,markov lag time,30,,TRUE,FALSE,FALSE
+,HTMD:_High2016,Villin,markov lag time,30,ns,TRUE,FALSE,FALSE
 ,Variationa2018,Villin,feature,alpha-distances,,TRUE,FALSE,TRUE
 ,Variationa2018,Villin,TICA lag,44,ns,TRUE,FALSE,TRUE
 ,Variationa2018,Villin,TICA m,4,,TRUE,FALSE,TRUE
@@ -313,7 +313,7 @@ different dataset,Maximizing2018,Villin,feature,heavy-distances,,TRUE,FALSE,TRUE
 , SAXS-guide2018,Villin,TICA lag,,,TRUE,FALSE,FALSE
 , SAXS-guide2018,Villin,TICA m,,,TRUE,FALSE,FALSE
 , SAXS-guide2018,Villin,TICA scaling,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,markov lag time,,ns,TRUE,FALSE,FALSE
+, SAXS-guide2018,Villin,markov lag time,30,ns,TRUE,FALSE,FALSE
 , SAXS-guide2018,Villin,clustering method,k-centers,,TRUE,FALSE,FALSE
 , SAXS-guide2018,Villin,clustering n,500,,TRUE,FALSE,FALSE
 , SAXS-guide2018,Protein G,feature,"backbone-dihedrals, chi1-dihedral",,TRUE,FALSE,FALSE
