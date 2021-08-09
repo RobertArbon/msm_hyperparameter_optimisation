@@ -10,7 +10,7 @@ import re
 cols = sns.color_palette('colorblind')
 
 PROTEIN_DIRS = ['1fme', '2f4k', '2jof', '2wav', 'cln025', 'gtt', 'prb', 'uvf', 'lambda', 'ntl9', 'nug2', 'a3d']
-PROTEIN_LABELS = ['1FME', 'Villin', 'Trp-cage', 'BBL', 'Chignolin', 'WW-domain', 'Protein-B', 'Homeodomain', 'Lambda-repressor', 'NTL9', 'Protein-G', 'Alpha-3']
+PROTEIN_LABELS = ['BBA', 'Villin', 'Trp-cage', 'BBL', 'Chignolin', 'WW-domain', 'Protein-B', 'Homeodomain', '$\lambda$-repressor', 'NTL9', 'Protein-G', r'$\alpha$3D']
 LETTERS = list('abcdefghijklmnopqrstuvwxyz')
 
 FIG_DIR =Path(__file__).absolute().parents[1].joinpath('figures')
@@ -20,13 +20,13 @@ assert FIG_DIR.exists(), "path to figures directory doesn't exist"
 
 def get_timescales(hdf_path: Path) -> pd.DataFrame:
     ts = pd.read_hdf(hdf_path, key='timescales')
-    ts_summary = ts.groupby(['lag', 'num_its'], as_index=False).agg(
-                            median = ("value", lambda x: np.quantile(x, 0.5)), 
-                            lower = ("value", lambda x: np.quantile(x, 0.025)), 
-                            upper = ("value", lambda x: np.quantile(x, 0.975)))
-    ts_summary['del_lower'] = ts_summary['median'] - ts_summary['lower']
-    ts_summary['del_upper'] = ts_summary['upper'] - ts_summary['median']
-    return ts_summary
+#     ts_summary = ts.groupby(['lag', 'num_its'], as_index=False).agg(
+#                             median = ("value", lambda x: np.quantile(x, 0.5)), 
+#                             lower = ("value", lambda x: np.quantile(x, 0.025)), 
+#                             upper = ("value", lambda x: np.quantile(x, 0.975)))
+#     ts_summary['del_lower'] = ts_summary['median'] - ts_summary['lower']
+#     ts_summary['del_upper'] = ts_summary['upper'] - ts_summary['median']
+    return ts
 
 
 def get_hp_index(paths: List[Path], parent: int=0) -> List[int]:
@@ -41,28 +41,36 @@ def get_timescales_df(results_paths):
     for i, path in zip(indices, results_paths):
         ts = get_timescales(path)
         hp = pd.read_hdf(path, key='hp')
-        hp['index'] = i #path.parents[0].stem
+        hp['hp_index'] = i #path.parents[0].stem
         df = ts.join(hp).ffill()
         all_ts.append(df)
     all_ts = pd.concat(all_ts, axis=0)
     return all_ts
 
 
-def timescale_gradient(ts_df: pd.DataFrame, its: int=2, log: bool = True, denom: str='one') -> pd.DataFrame:
-    t = ts_df.loc[ts_df.num_its == float(its), ['protein', 'lag', 'median', 'index']]
+def timescale_gradient(ts_df: pd.DataFrame, x: str, log: bool = True, denom: str='one') -> pd.DataFrame:
+    """
+    Takes difference in timescales with respect to x.  Dataframe must be suitably subset before passing!
+    """
+    t = ts_df.loc[:, ['protein', x, 'value', 'hp_index', 'iteration']]
+    
+    dupes = t.duplicated(subset=['protein', x, 'hp_index', 'iteration'])
+    
+    assert not np.any(dupes.values), f'Duplicate values found: protein, {x}, index, & iteration, columns must be unique'
+    
     if log:
-        t['median'] = np.log(t['median'])
+        t['value'] = np.log(t['value'])
         
-    t = t.sort_values(by=['protein', 'index', 'lag'])
-    t['delta_t'] = t.groupby(['protein', 'index']).diff()['median']
-    t['delta_lag'] = t.groupby(['protein', 'index']).diff()['lag']
+    t.sort_values(by=['protein', 'hp_index', 'iteration', x], inplace=True)
+    t['delta_t'] = t.groupby(['protein', 'hp_index', 'iteration']).diff()['value']
+    t['delta_x'] = t.groupby(['protein', 'hp_index', 'iteration']).diff()[x]
     
     if denom=='one':
         t['grad_t'] = t['delta_t']/1.0
-    elif denom=='lag':
-        t['grad_t'] = t['delta_t']/t['lag']
-    elif denom=='delta_lag':
-        t['grad_t'] = t['delta_t']/t['delta_lag']
+    elif denom=='x':
+        t['grad_t'] = t['delta_t']/t[x]
+    elif denom=='delta_x':
+        t['grad_t'] = t['delta_t']/t['delta_x']
         
     t.dropna(axis = 0, how = 'any', inplace = True)
     return t
