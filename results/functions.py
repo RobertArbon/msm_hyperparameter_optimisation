@@ -18,14 +18,8 @@ assert FIG_DIR.exists(), "path to figures directory doesn't exist"
 
 
 
-def get_timescales(hdf_path: Path) -> pd.DataFrame:
-    ts = pd.read_hdf(hdf_path, key='timescales')
-#     ts_summary = ts.groupby(['lag', 'num_its'], as_index=False).agg(
-#                             median = ("value", lambda x: np.quantile(x, 0.5)), 
-#                             lower = ("value", lambda x: np.quantile(x, 0.025)), 
-#                             upper = ("value", lambda x: np.quantile(x, 0.975)))
-#     ts_summary['del_lower'] = ts_summary['median'] - ts_summary['lower']
-#     ts_summary['del_upper'] = ts_summary['upper'] - ts_summary['median']
+def get_df(hdf_path: Path, results: str) -> pd.DataFrame:
+    ts = pd.read_hdf(hdf_path, key=results)
     return ts
 
 
@@ -35,11 +29,11 @@ def get_hp_index(paths: List[Path], parent: int=0) -> List[int]:
     return index
 
 
-def get_timescales_df(results_paths):
+def get_results_df(results_paths, results: str):
     all_ts = []
     indices = get_hp_index(results_paths)
     for i, path in zip(indices, results_paths):
-        ts = get_timescales(path)
+        ts = get_df(path, results)
         hp = pd.read_hdf(path, key='hp')
         hp['hp_index'] = i #path.parents[0].stem
         df = ts.join(hp).ffill()
