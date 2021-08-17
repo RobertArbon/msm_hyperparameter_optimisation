@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[22]:
 
 
 import pyemma as pm
@@ -15,12 +15,12 @@ from typing import Dict, Union, List
 from msmsense.featurizers import dihedrals, distances
 from msmsense.bootstrap_cmatrices import get_sub_dict, get_trajs
 from functools import partial
-
+import sys
 import pickle
 import time
 
 
-# In[3]:
+# In[23]:
 
 
 def get_feature_dict(df, row_num):
@@ -61,7 +61,7 @@ def get_trajs_top(traj_dir: Path, protein_dir: str, rng: Union[np.random.Generat
     
 
 
-# In[4]:
+# In[76]:
 
 
 class MSM(object):
@@ -117,22 +117,22 @@ class MSM(object):
         """
         evs = self.msm.eigenvectors_left(num_procs+1)
         active_set = self.msm.active_set
-        non_active_set_val = 0 # if the state is not in the active set, set the projection to this value. 
-        
+        NON_ACTIVE_PROJ_VAL = 0 # if the state is not in the active set, set the projection to this value. 
+        NON_ACTIVE_IX_VAL = -1
         evs = evs[1:, :] # remove the stationary distribution
         proj_trajs = []
         for dtraj in dtrajs:
             all_procs = []
             for proc_num in range(num_procs):
                 
-                tmp = np.zeros(dtraj.shape[0], dtype=float)
+                tmp = np.ones(dtraj.shape[0], dtype=float)
+                tmp[:] = NON_ACTIVE_PROJ_VAL
+                
                 for i in range(dtraj.shape[0]):
-                    x = dtraj[i]
-                    if x in active_set:
+                    x = self.msm._full2active[dtraj[i]]
+                    if x != NON_ACTIVE_IX_VAL:
                         tmp[i] = evs[proc_num, x]
-                    else:
-                        tmp[i] = non_active_set_val
-                tmp = tmp.reshape(-1, 1)
+                    tmp = tmp.reshape(-1, 1)
                 
                 all_procs.append(tmp)
             all_procs = np.concatenate(all_procs, axis=1)
@@ -188,23 +188,22 @@ class MSM(object):
     
 
 
-# In[5]:
+# In[87]:
 
 if __name__=='__main__':
-    
-    args = sys.sargv
-    
     traj_dir = Path('/Volumes/REA/MD/12FF/strided/')
-    
-    protein_dir = args[1].upper()
-    
+    protein_dir = sys.argv[1].upper()   #'1FME'
     out_dir = Path('/Volumes/REA/Data/fast_folders/model_comparisons/').joinpath(protein_dir)
     out_dir.mkdir(exist_ok=True, parents=True)
-
+    
     comparator_ix = 0 # Always best because of sorting. 
     num_bs_iter = 100
     n_points = 50 # points along path
     n_geom_samples = 50 # samples to create min rmsd
+
+
+    # In[88]:
+
 
 
     mod_defs = set_proper_dtypes(pd.read_hdf('../results/best_hps_per_feature.h5', key='best_hps_per_feature'))
@@ -212,7 +211,14 @@ if __name__=='__main__':
     mod_defs.sort_values(by=['protein', 'hp_rank'], inplace=True)
     mod_defs.reset_index(inplace=True, drop=True)
 
+
+    # In[89]:
+
+
     mod_defs.to_hdf(out_dir.joinpath('model_definitions.h5'), key='model_definitions')
+
+
+    # In[90]:
 
 
     rng = np.random.default_rng(12098345)
@@ -271,5 +277,6 @@ if __name__=='__main__':
             pickle.dump(file=iter_out_dir.joinpath(f'path_{proc_num}_comparison.pkl').open('wb'), obj=projs)
 
         print((time.time() - tic)/60)
+
 
 
