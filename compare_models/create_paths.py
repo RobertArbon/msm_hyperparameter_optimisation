@@ -230,51 +230,60 @@ if __name__=='__main__':
 
         # Create output directory
         iter_out_dir = out_dir.joinpath(f"iter_{bs_num}")
-        iter_out_dir.mkdir(exist_ok=True)
+        if iter_out_dir.exists():
+            continue
+        else:
+            iter_out_dir.mkdir()
 
-        # Sample traj paths and save results
-        traj_paths = get_trajs_top(traj_dir, protein_dir, rng)
-        assert len(traj_paths['trajs']) > 0, 'no trajectories found'
-        pickle.dump(file=iter_out_dir.joinpath('input_paths.pkl').open('wb'), obj=traj_paths)
+            # Sample traj paths and save results
+            traj_paths = get_trajs_top(traj_dir, protein_dir, rng)
+            assert len(traj_paths['trajs']) > 0, 'no trajectories found'
+            pickle.dump(file=iter_out_dir.joinpath('input_paths.pkl').open('wb'), obj=traj_paths)
 
-        top = md.load(str(traj_paths['top']))
-        trajs = [md.load(str(x), top=top) for x in traj_paths['trajs']]
-        print('\tfinished loading trajectories')
+            top = md.load(str(traj_paths['top']))
+            trajs = [md.load(str(x), top=top) for x in traj_paths['trajs']]
+            print('\tfinished loading trajectories')
 
-        # Fit models and find paths
-        models = {}
-        for row_num in mod_defs.index:
-            print('Model num ', row_num)
-            hp_ix = mod_defs.hp_index[row_num]
-            hp_rank = mod_defs.hp_rank[row_num]
+            # Fit models and find paths
+            models = {}
+            for row_num in mod_defs.index:
+                print('Model num ', row_num)
+                hp_ix = mod_defs.hp_index[row_num]
+                hp_rank = mod_defs.hp_rank[row_num]
 
-            # model hyperparameters
-            lag = mod_defs.lag[row_num]
-            num_evs = mod_defs.k[row_num]
-            feat_kws = get_feature_dict(mod_defs, row_num)
-            tica_kws = get_kws_dict(mod_defs, row_num, 'tica')
-            cluster_kws = get_kws_dict(mod_defs, row_num, 'cluster')
+                # model hyperparameters
+                lag = mod_defs.lag[row_num]
+                num_evs = mod_defs.k[row_num]
+                feat_kws = get_feature_dict(mod_defs, row_num)
+                tica_kws = get_kws_dict(mod_defs, row_num, 'tica')
+                cluster_kws = get_kws_dict(mod_defs, row_num, 'cluster')
 
-            # Fit model
-            model = MSM(lag = lag, num_evs=num_evs, trajs=trajs, top=top,  feature_kws=feat_kws, tica_kws=tica_kws, cluster_kws=cluster_kws)
-            model.fit()
-            print('\tfinished fitting model')
-            # Estimate all paths
+                # Fit model
+                model = MSM(lag = lag, num_evs=num_evs, trajs=trajs, top=top,  feature_kws=feat_kws, tica_kws=tica_kws, cluster_kws=cluster_kws)
+                try:
+                    model.fit()
+                    print('\tfinished fitting model')
+                    # Estimate all paths
 
-            model.projection_paths(n_points=n_points, n_geom_samples=n_geom_samples)
-            print('\tfinished projecting paths')
-            pickle.dump(file=iter_out_dir.joinpath(f"mod_{row_num}_hp_{hp_ix}_rank_{hp_rank}_paths.pkl").open('wb'), obj=model.paths)
-            print('\tfinished dumping paths')
-            # Accumulate models for comparisons
-            models[row_num] = model
+                    model.projection_paths(n_points=n_points, n_geom_samples=n_geom_samples)
+                    print('\tfinished projecting paths')
+                    pickle.dump(file=iter_out_dir.joinpath(f"mod_{row_num}_hp_{hp_ix}_rank_{hp_rank}_paths.pkl").open('wb'), obj=model.paths)
+                    print('\tfinished dumping paths')
+                    # Accumulate models for comparisons
+                    models[row_num] = model
+                except Exception as e: 
+                    pickle.dump(file=iter_out_dir.joinpath('Error.txt').open('wt'), obj=str(e))
 
 
-        # Do model comparisons
-        for proc_num in list(models[comparator_ix].paths.keys()):  # shouldn't matter which model is used here. 
-            print('\tcomparing path ', proc_num)
-            paths = {k: v.get_projection_trajectory(proc_num+1) for k, v in models.items()}
-            projs = {f"mod_{k}_on_mod_{comparator_ix}": models[comparator_ix].transform(v)[0] for k, v in paths.items()}
-            pickle.dump(file=iter_out_dir.joinpath(f'path_{proc_num}_comparison.pkl').open('wb'), obj=projs)
+
+
+            # Do model comparisons
+            if comparator_ix in models.keys():
+                for proc_num in list(models[comparator_ix].paths.keys()):  # shouldn't matter which model is used here. 
+                    print('\tcomparing path ', proc_num)
+                    paths = {k: v.get_projection_trajectory(proc_num+1) for k, v in models.items()}
+                    projs = {f"mod_{k}_on_mod_{comparator_ix}": models[comparator_ix].transform(v)[0] for k, v in paths.items()}
+                    pickle.dump(file=iter_out_dir.joinpath(f'path_{proc_num}_comparison.pkl').open('wb'), obj=projs)
 
         print((time.time() - tic)/60)
 
