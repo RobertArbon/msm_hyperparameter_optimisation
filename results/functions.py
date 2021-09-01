@@ -6,6 +6,10 @@ import seaborn as sns
 import plotly.express as px
 from typing import List
 import re
+import patsy as pt
+import pymc3 as pm
+from sklearn import preprocessing
+
 
 cols = sns.color_palette('colorblind')
 
@@ -123,3 +127,111 @@ def plot_taus(ts, ax, label):
     for its in nits:
         ax = plot_tau(ts, its, ax, label)
     return ax
+
+
+
+def gamma(alpha, beta):
+    def g(x):
+        return pm.Gamma(x, alpha=alpha, beta=beta)
+    return g
+
+def hcauchy(beta):
+    def g(x):
+        return pm.HalfCauchy(x, beta=beta)
+    return g
+
+
+
+# draws=1000, step=None, init='auto', n_init=200000, start=None, trace=None, chain_idx=0, chains=None, cores=None, tune=1000, progressbar=True, model=None, random_seed=None, discard_tuned_samples=True, compute_convergence_checks=True, callback=None, jitter_max_retries=10, *, return_inferencedata=None, idata_kwargs: Optional[dict] = None, mp_ctx=None, pickle_backend: str = 'pickle', **kwargs
+
+def fit_gp(y, X, l_prior, eta_prior, sigma_prior, kernel_type='M52', bayes_kws=dict(draws=1000, tune=1000, chains=2, cores=1), prop_Xu=None):
+    """
+    function to return a pymc3 model
+    y : dependent variable
+    X : independent variables
+    prop_Xu : number of inducing varibles to use. If None, use full marginal likelihood. If not none, use FTIC. 
+    bayes_kw : kws for pm.sample
+    X, y are dataframes. We'll use the column names. 
+    """
+    kernel_type = kernel_type.lower()
+    with pm.Model() as model:
+        # Covert arrays
+        X_a = X.values
+        y_a = y.values.flatten()
+        X_cols = list(X.columns)
+        
+        # Globals
+# #         prop_Xu = 0.1
+#         l_prior = gamma(1, 0.05)
+#         eta_prior = hcauchy(2)
+#         sigma_prior = hcauchy(2)
+
+        # Kernels
+        # 3 way interaction
+        eta = eta_prior('eta')
+        cov = eta**2
+        for i in range(X_a.shape[1]):
+            var_lab = 'l_'+X_cols[i]
+            if kernel_type=='rbf':
+                cov = cov*pm.gp.cov.ExpQuad(X_a.shape[1], ls=l_prior(var_lab), active_dims=[i])
+            if kernel_type=='exponential':
+                cov = cov*pm.gp.cov.Exponential(X_a.shape[1], ls=l_prior(var_lab), active_dims=[i])
+            if kernel_type=='m52':
+                cov = cov*pm.gp.cov.Matern52(X_a.shape[1], ls=l_prior(var_lab), active_dims=[i])
+            if kernel_type=='m32':
+                cov = cov*pm.gp.cov.Matern32(X_a.shape[1], ls=l_prior(var_lab), active_dims=[i])
+
+        # Covariance model
+        cov_tot = cov 
+        
+        # Noise model
+        sigma_n =sigma_prior('sigma_n')
+
+        # Model
+        if not (prop_Xu is None):
+            # Inducing variables
+            num_Xu = int(X_a.shape[0]*prop_Xu)
+            Xu = pm.gp.util.kmeans_inducing_points(num_Xu, X_a)
+            gp = pm.gp.MarginalSparse(cov_func=cov_tot, approx="FITC")
+            y_ = gp.marginal_likelihood('y_', X=X_a, y=y_a, Xu=Xu, noise=sigma_n)
+        else:
+            gp = pm.gp.Marginal(cov_func=cov_tot)
+            y_ = gp.marginal_likelihood('y_', X=X_a, y=y_a, noise=sigma_n)
+            
+        
+        if not (bayes_kws is None):
+            trace = pm.sample(**bayes_kws)
+            result = trace
+        else:
+            mp = pm.find_MAP()
+            result = mp
+            
+    return gp, result, model
+
+
+
+def create_dmatrices(df, formula):
+    y, X = pt.dmatrices(formula, data=df, return_type='dataframe')
+    X = X.rename(columns=lambda x: re.sub('C','',x))
+    return y, X
+
+
+def scale_dmatrix(X, scaler=None):
+    # scales matrices and returns scaler
+    if scaler is None: 
+        scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+        scaler.fit(X.values)
+    
+    Xs = scaler.transform(X.values)
+    Xs = pd.DataFrame(Xs, columns=[x+'_s' for x in X.columns], index=X.index)
+    return Xs, scaler
+
+def create_grid(search_space):
+    # creates prediction grid from search space.
+    Xnew = np.meshgrid(*search_space.values())
+    Xnew = np.concatenate([x.reshape(-1, 1) for x in Xnew], axis=1)
+    Xnew = pd.DataFrame(Xnew, columns=search_space.keys())
+    for k, v in search_space.items():
+        Xnew.loc[:, k] = Xnew.loc[:, k].astype(v.dtype)
+    return Xnew
+
