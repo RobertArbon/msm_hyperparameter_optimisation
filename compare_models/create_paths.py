@@ -272,7 +272,8 @@ if __name__=='__main__':
                     # Accumulate models for comparisons
                     models[row_num] = model
                 except Exception as e: 
-                    pickle.dump(file=iter_out_dir.joinpath('Error.txt').open('wt'), obj=str(e))
+                    with iter_out_dir.joinpath('Error.txt').open('wt') as f:
+                        f.writelines(str(e))
 
 
 
