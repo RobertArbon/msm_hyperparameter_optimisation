@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[22]:
-
-
 import pyemma as pm
 import mdtraj as md
 from molpx.generate import projection_paths
@@ -18,9 +15,6 @@ from functools import partial
 import sys
 import pickle
 import time
-
-
-# In[23]:
 
 
 def get_feature_dict(df, row_num):
@@ -50,24 +44,28 @@ def set_proper_dtypes(df):
 def get_trajs_top(traj_dir: Path, protein_dir: str, rng: Union[np.random.Generator, None]=None):
     trajs = list(traj_dir.rglob(f"*{protein_dir.upper()}*/*.xtc"))
     trajs.sort()
-    
     if rng is not None:
-        ix = rng.choice(np.arange(len(trajs)), size=10, replace=True)
+        ix = rng.choice(np.arange(len(trajs)), size=len(trajs), replace=True)
         trajs = [trajs[i] for i in ix]
     
     top = list(traj_dir.rglob(f"*{protein_dir.upper()}*/*.pdb"))[0]
     
     return {'trajs': trajs, 'top': top}
     
-
-
-# In[76]:
-
+    
+def get_random_traj(trajs: List[md.Trajectory], num_frames: int, rng: np.random.Generator)-> md.Trajectory: 
+    traj_ix = np.arange(len(trajs))
+    frame_ix = [np.arange(traj.n_frames) for traj in trajs]
+    
+    rand_ix = [(ix, rng.choice(frame_ix[ix])) for ix in rng.choice(traj_ix, size=num_frames)]
+    rand_traj = md.join([trajs[x[0]][x[1]] for x in rand_ix])
+    return rand_traj
+    
 
 class MSM(object):
     
     def __init__(self, lag: int, num_evs: int, trajs: List[md.Trajectory], top: md.Trajectory,
-                 feature_kws: Dict[str, Union[str, int, float]], tica_kws: Dict[str, Union[str, int, float]], cluster_kws: Dict[str, Union[str, int, float]]):
+                 feature_kws: Dict[str, Union[str, int, float]], tica_kws: Dict[str, Union[str, int, float]], cluster_kws: Dict[str, Union[str, int, float]], seed: int):
         """
         Defines the whole MSM pipeline.
         lag: markov lag time 
@@ -84,6 +82,7 @@ class MSM(object):
         self.cluster_kws = cluster_kws
         self.featurizer = None
         self._set_featurizer()
+        self.seed = seed
         
         self.tica = None
         self.cluster = None
@@ -106,7 +105,7 @@ class MSM(object):
         ftrajs = self.featurizer(self.trajs)
         self.tica = pm.coordinates.tica(data=ftrajs, **self.tica_kws)
         ttrajs = self.tica.get_output()
-        self.cluster = pm.coordinates.cluster_kmeans(data=ttrajs, **self.cluster_kws)
+        self.cluster = pm.coordinates.cluster_kmeans(data=ttrajs, **self.cluster_kws, fixed_seed=self.seed)
         dtrajs = self.cluster.dtrajs
         self.msm = pm.msm.estimate_markov_model(dtrajs=dtrajs, lag=self.lag)
 
@@ -115,11 +114,11 @@ class MSM(object):
         """ Project dtrajs onto first num_proc eigenvectors excluding stationary distribution. i.e., if num_proc=1 then project onto the slowest eigenvector only. 
         All projections ignore the stationary distribution
         """
-        evs = self.msm.eigenvectors_left(num_procs+1)
+        evs = self.msm.eigenvectors_right(num_procs+1)
         active_set = self.msm.active_set
         NON_ACTIVE_PROJ_VAL = 0 # if the state is not in the active set, set the projection to this value. 
         NON_ACTIVE_IX_VAL = -1
-        evs = evs[1:, :] # remove the stationary distribution
+        evs = evs[:, 1:] # remove the stationary distribution
         proj_trajs = []
         for dtraj in dtrajs:
             all_procs = []
@@ -131,7 +130,7 @@ class MSM(object):
                 for i in range(dtraj.shape[0]):
                     x = self.msm._full2active[dtraj[i]]
                     if x != NON_ACTIVE_IX_VAL:
-                        tmp[i] = evs[proc_num, x]
+                        tmp[i] = evs[x, proc_num]
                     tmp = tmp.reshape(-1, 1)
                 
                 all_procs.append(tmp)
@@ -184,44 +183,38 @@ class MSM(object):
         projections = self._get_all_projections(num_procs=self.num_evs - 1, dtrajs=dtrajs)
         return projections
         
-        
-    
 
-
-# In[87]:
 
 if __name__=='__main__':
+    
+    # Inputs and output paths
     traj_dir = Path('/Volumes/REA/MD/12FF/strided/')
     protein_dir = sys.argv[1].upper()   #'1FME'
     out_dir = Path('/Volumes/REA/Data/fast_folders/model_comparisons/').joinpath(protein_dir)
     out_dir.mkdir(exist_ok=True, parents=True)
     
+    
+    # Globals
     comparator_ix = 0 # Always best because of sorting. 
     num_bs_iter = 100
     n_points = 50 # points along path
     n_geom_samples = 50 # samples to create min rmsd
-
-
-    # In[88]:
-
-
-
+    
+    seed = 12098345
+    
+    # Load model definitions
     mod_defs = set_proper_dtypes(pd.read_hdf('../results/best_hps_per_feature.h5', key='best_hps_per_feature'))
     mod_defs = mod_defs.loc[mod_defs.protein_dir==protein_dir.lower(), :]
     mod_defs.sort_values(by=['protein', 'hp_rank'], inplace=True)
     mod_defs.reset_index(inplace=True, drop=True)
-
-
-    # In[89]:
-
-
+    
+    # Save specific model definitions for convenience
     mod_defs.to_hdf(out_dir.joinpath('model_definitions.h5'), key='model_definitions')
 
 
-    # In[90]:
 
-
-    rng = np.random.default_rng(12098345)
+    # RNG for bootstrapping and creating the random 
+    rng = np.random.default_rng(seed)
 
     for bs_num in range(num_bs_iter):
         print('BS iteration ', bs_num)
@@ -259,7 +252,7 @@ if __name__=='__main__':
                 cluster_kws = get_kws_dict(mod_defs, row_num, 'cluster')
 
                 # Fit model
-                model = MSM(lag = lag, num_evs=num_evs, trajs=trajs, top=top,  feature_kws=feat_kws, tica_kws=tica_kws, cluster_kws=cluster_kws)
+                model = MSM(lag = lag, num_evs=num_evs, trajs=trajs, top=top,  feature_kws=feat_kws, tica_kws=tica_kws, cluster_kws=cluster_kws, seed=seed)
                 try:
                     model.fit()
                     print('\tfinished fitting model')
@@ -276,14 +269,17 @@ if __name__=='__main__':
                         f.writelines(str(e))
 
 
-
-
             # Do model comparisons
             if comparator_ix in models.keys():
                 for proc_num in list(models[comparator_ix].paths.keys()):  # shouldn't matter which model is used here. 
                     print('\tcomparing path ', proc_num)
                     paths = {k: v.get_projection_trajectory(proc_num+1) for k, v in models.items()}
                     projs = {f"mod_{k}_on_mod_{comparator_ix}": models[comparator_ix].transform(v)[0] for k, v in paths.items()}
+                    
+                    random_traj = get_random_traj(trajs, n_points, rng)
+                    random_traj.save_xtc(str(iter_out_dir.joinpath(f"path_{proc_num}_random_trajectory.xtc")))
+                    projs[f"random_on_mod_{comparator_ix}"] = models[comparator_ix].transform(random_traj)[0]
+                    
                     pickle.dump(file=iter_out_dir.joinpath(f'path_{proc_num}_comparison.pkl').open('wb'), obj=projs)
 
         print((time.time() - tic)/60)
