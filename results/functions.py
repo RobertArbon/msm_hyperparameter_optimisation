@@ -13,8 +13,36 @@ from sklearn import preprocessing
 
 cols = sns.color_palette('colorblind')
 
-PROTEIN_DIRS = ['1fme', '2f4k', '2jof', '2wav', 'cln025', 'gtt', 'prb', 'uvf', 'lambda', 'ntl9', 'nug2', 'a3d']
-PROTEIN_LABELS = ['BBA', 'Villin', 'Trp-cage', 'BBL', 'Chignolin', 'WW-domain', 'Protein-B', 'Homeodomain', '$\lambda$-repressor', 'NTL9', 'Protein-G', r'$\alpha$3D']
+# PROTEIN_DIRS = ['1fme', '2f4k', '2jof', '2wav', 'cln025', 'gtt', 'prb', 'uvf', 'lambda', 'ntl9', 'nug2', 'a3d']
+# PROTEIN_LABELS = ['BBA', 'Villin', 'Trp-cage', 'BBL', 'Chignolin', 'WW-domain', 'Protein-B', 'Homeodomain', '$\lambda$-repressor', 'NTL9', 'Protein-G', r'$\alpha$3D']
+PROTEIN_DIRS = ['cln025',
+ '2jof',
+ '1fme',
+ '2f4k',
+ 'gtt',
+ 'ntl9',
+ '2wav',
+ 'prb',
+ 'uvf',
+ 'nug2',
+ 'a3d',
+ 'lambda']
+
+
+PROTEIN_LABELS = ['Chignolin',
+ 'Trp-cage',
+ 'BBA',
+ 'Villin',
+ 'WW-domain',
+ 'NTL9',
+ 'BBL',
+ 'Protein-B',
+ 'Homeodomain',
+ 'Protein-G',
+ '$\\alpha$3D',
+ '$\\lambda$-repressor']
+
+
 LETTERS = list('abcdefghijklmnopqrstuvwxyz')
 
 FIG_DIR =Path(__file__).absolute().parents[1].joinpath('figures')
