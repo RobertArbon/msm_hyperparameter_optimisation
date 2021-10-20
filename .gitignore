@@ -3,6 +3,7 @@
 feature_selection/ 
 .idea
 *.h5
+*.hdf
 *.mp4
 *.gif
 *.pdb
