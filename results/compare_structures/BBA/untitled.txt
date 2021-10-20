@@ -7,4 +7,5 @@ load top.pdb, m1_s1
 load_traj VAMP_model_logit(dist.)_state_1.xtc, m0_s1
 load_traj VAMP_and_Gap_model_logit(dist.)_state_1.xtc, m1_s1
 
+
 set all_states, on
