@@ -168,28 +168,38 @@ def get_trajectories(traj_dir, protein_dir, rng):
     return traj_paths_str['trajs'], traj_paths_str['top']
              
 
+
 def get_model_defs(all_models, protein, feature):
     mod_defs = all_models.loc[all_models.protein==protein, :].copy()
     row_num = np.where(mod_defs['feature'].values==feature)[0][0]
     return mod_defs, row_num
 
 
-def bootstrap_cktest(traj_dir, protein_dir, rng, mod_defs, row_num, num_bootstraps=100):
+def sample_states(traj_dir, protein_dir, rng, mod_defs, row_num, num_structures=100):
     
-    cktests = {'predictions': [], 'estimates': []}
     
-    for i in range(num_bootstraps):
-        print('\t', i, end=', ')
-        trajs, top = get_trajectories(traj_dir, protein_dir, rng)
-        kwargs = model_kwargs(mod_defs, top, row_num, seed)
-        model = fit_model(kwargs, trajs)
-        cktest = model.msm.cktest(nsets=model.num_evs, mlags=10)
-        cktests['predictions'].append(cktest.predictions[np.newaxis, ...])
-        cktests['estimates'].append(cktest.estimates[np.newaxis, ...])
+
+    trajs, top = get_trajectories(traj_dir, protein_dir, rng)
+    kwargs = model_kwargs(mod_defs, top, row_num, seed)
+    model = fit_model(kwargs, trajs)
     
-    cktests['predictions'] = np.concatenate(cktests['predictions'], axis=0)
-    cktests['estimates'] = np.concatenate(cktests['estimates'], axis=0)
-    return cktests
+    num_procs = model.num_evs
+    hmm = model.msm.coarse_grain(num_procs)
+            
+    sd = hmm.stationary_distribution
+
+    # Sort states and get distributions
+    state_ix = np.argsort(sd)[::-1]
+    sd = sd[state_ix]
+    ms_dist = hmm.metastable_distributions
+    ms_dist = ms_dist[state_ix, :]
+
+    # Get samples
+    samples = [pm.coordinates.save_traj(trajs, idist, outfile=None, top=top)
+              for idist in model.msm.sample_by_distributions(ms_dist, num_structures)] 
+    
+    
+    return samples
 
     
 
@@ -202,12 +212,14 @@ if __name__ == '__main__':
     model_selections={'m1': m1_sel, 'm2': m2_sel}
     
     prot_dict = dict(zip(funcs.PROTEIN_LABELS, funcs.PROTEIN_DIRS))
+    prot_pdbs = {'Chignolin': '5awl.pdb', 'BBA': '1fme.pdb', 'Trp-cage': '2jof.pdb',  
+                 'Villin': '2f4k.pdb', 'WW-domain': '2f21.pdb' , 'BBL': '2wxc.pdb' , 
+                 'Homeodomain': '2p6j.pdb', 'Protein-B': '1prb.pdb'}
     
-    num_bootstraps = 100 
+    num_structures = 100 
     seed = 12098345
     
     features = m1_sel.feature.unique()
-    
     
     rng = np.random.default_rng(seed)
     
@@ -215,7 +227,7 @@ if __name__ == '__main__':
     
     # Setup output directory
     protein_dir = prot_dict[protein]
-    root_dir = Path(f"ck_tests/{protein}")
+    root_dir = Path(f"comapre_structures/{protein}")
     root_dir.mkdir(exist_ok=True)
     
     # loop over feature
@@ -226,12 +238,10 @@ if __name__ == '__main__':
             print(method)
             # Get model definition
             mod_defs, row_num = get_model_defs(selection, protein, feature)
-    
-            # create output path
-            output_path = root_dir.joinpath(f"{method}_{feature.replace('.', '')}_hpix{mod_defs['hp_index'].values[row_num]}_cktest.p")
-            
-    
+
             # bootstrap cktest
-            cktests = bootstrap_cktest(traj_dir, protein_dir, rng, mod_defs, row_num, num_bootstraps=num_bootstraps)
-            pickle.dump(file=output_path.open('wb'), obj=cktests)
+            samples = sample_states(traj_dir, protein_dir, rng, mod_defs, row_num, num_structures=num_structures)
+            for i, traj in enumerate(samples):
+                traj.save_xtc(root_dir.joinpath(f"{sele_method}_model_{feat}_state_{i}.xtc")
+
     
