@@ -13,6 +13,7 @@ feature_selection/
 *.pdf
 *.pm
 *.npz
+*.p
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
