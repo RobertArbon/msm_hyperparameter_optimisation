@@ -126,18 +126,7 @@ class MSM(object):
         dtrajs = cluster.dtrajs
         self.msm = pm.msm.estimate_markov_model(dtrajs=dtrajs, lag=self.lag)
 
-    
-
         
-
-
-# # Detailed comparisons
-# 
-# This workbook fits the best hyperparameters for each feature and provides a more detailed comparison. This complements the model comparison in terms of eigenvector projections. 
-# 
-
-# In[4]:
-
 
 def model_kwargs(mod_defs, top, row_num, seed):
 
@@ -160,7 +149,7 @@ def cktest(model, mlags=10):
     pass
 
 
-def get_trajectories(traj_dir, protein_dir, rng):
+def get_trajectories(traj_dir, protein_dir, rng = None):
     traj_paths = get_trajs_top(traj_dir, protein_dir, rng)
     traj_paths_str = dict(top=str(traj_paths['top']), trajs=[str(x) for x in traj_paths['trajs']])
     top = md.load(str(traj_paths['top']))
@@ -171,7 +160,10 @@ def get_trajectories(traj_dir, protein_dir, rng):
 
 def get_model_defs(all_models, protein, feature):
     mod_defs = all_models.loc[all_models.protein==protein, :].copy()
-    row_num = np.where(mod_defs['feature'].values==feature)[0][0]
+    if feature in mod_defs['feature'].values:
+        row_num = np.where(mod_defs['feature'].values==feature)[0][0]
+    else: 
+        row_num = None
     return mod_defs, row_num
 
 
@@ -179,7 +171,7 @@ def sample_states(traj_dir, protein_dir, rng, mod_defs, row_num, num_structures=
     
     
 
-    trajs, top = get_trajectories(traj_dir, protein_dir, rng)
+    trajs, top = get_trajectories(traj_dir, protein_dir)
     kwargs = model_kwargs(mod_defs, top, row_num, seed)
     model = fit_model(kwargs, trajs)
     
@@ -209,7 +201,8 @@ if __name__ == '__main__':
     traj_dir = Path('/Volumes/REA/MD/12FF/strided/')
     m1_sel = set_proper_dtypes(pd.read_hdf('./summaries/m1_model_selection.h5'))
     m2_sel = set_proper_dtypes(pd.read_hdf('./summaries/m2_model_selection.h5'))
-    model_selections={'m1': m1_sel, 'm2': m2_sel}
+    m3_sel = set_proper_dtypes(pd.read_hdf('./summaries/m3_model_selection.h5'))
+    model_selections={'m1': m1_sel, 'm2': m2_sel, 'm3': m3_sel}
     
     prot_dict = dict(zip(funcs.PROTEIN_LABELS, funcs.PROTEIN_DIRS))
     prot_pdbs = {'Chignolin': '5awl.pdb', 'BBA': '1fme.pdb', 'Trp-cage': '2jof.pdb',  
@@ -227,8 +220,8 @@ if __name__ == '__main__':
     
     # Setup output directory
     protein_dir = prot_dict[protein]
-    root_dir = Path(f"comapre_structures/{protein}")
-    root_dir.mkdir(exist_ok=True)
+    root_dir = Path(f"compare_structures/{protein}")
+    root_dir.mkdir(exist_ok=True, parents=True)
     
     # loop over feature
     for feature in features: 
@@ -238,10 +231,10 @@ if __name__ == '__main__':
             print(method)
             # Get model definition
             mod_defs, row_num = get_model_defs(selection, protein, feature)
-
-            # bootstrap cktest
-            samples = sample_states(traj_dir, protein_dir, rng, mod_defs, row_num, num_structures=num_structures)
-            for i, traj in enumerate(samples):
-                traj.save_xtc(root_dir.joinpath(f"{sele_method}_model_{feat}_state_{i}.xtc")
+            if not row_num is None:
+                # bootstrap cktest
+                samples = sample_states(traj_dir, protein_dir, rng, mod_defs, row_num, num_structures=num_structures)
+                for i, traj in enumerate(samples):
+                    traj.save_xtc(str(root_dir.joinpath(f"{method}_model_{feature}_state_{i}.xtc")))
 
     
