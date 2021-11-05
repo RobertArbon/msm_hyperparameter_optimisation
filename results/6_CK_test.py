@@ -199,7 +199,8 @@ if __name__ == '__main__':
     traj_dir = Path('/Volumes/REA/MD/12FF/strided/')
     m1_sel = set_proper_dtypes(pd.read_hdf('./summaries/m1_model_selection.h5'))
     m2_sel = set_proper_dtypes(pd.read_hdf('./summaries/m2_model_selection.h5'))
-    model_selections={'m1': m1_sel, 'm2': m2_sel}
+    m3_sel = set_proper_dtypes(pd.read_hdf('./summaries/m3_model_selection.h5'))
+    model_selections={'m1': m1_sel, 'm2': m2_sel, 'm3': m3_sel}
     
     prot_dict = dict(zip(funcs.PROTEIN_LABELS, funcs.PROTEIN_DIRS))
     
