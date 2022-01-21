@@ -1,339 +1,339 @@
-﻿Note,Citation,Protein,Hyperparameter,Value,units,MSM?,Novel?,Uses optimisation
-,Computing_2019,Villin,TICA lag,50,ns,TRUE,FALSE,FALSE
-,Computing_2019,Villin,TICA m,2,,TRUE,FALSE,FALSE
-,Computing_2019,Villin,feature,all-dihedrals,,TRUE,FALSE,FALSE
-,Computing_2019,Villin,clustering method,regular grid,,TRUE,FALSE,FALSE
-,Computing_2019,Villin,clustering n,625,,TRUE,FALSE,FALSE
-,Computing_2019,Villin,markov lag time,40,ns,TRUE,FALSE,FALSE
-,Computing_2019,Villin,g,3,,TRUE,FALSE,FALSE
-,Computing_2019,Villin,coarse-graining,PCCA,,TRUE,FALSE,FALSE
-,Data-drive2018,NTL9,feature,heavy-distances,,FALSE,TRUE,FALSE
-,Data-drive2018,NTL9,markov lag time,10,ns,FALSE,TRUE,FALSE
-,A_Data-Dri2018,NTL9,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,TICA lag,100,ns,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,TICA scaling,commute-map,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,TICA m,50,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,clsutering method,k-means,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,clustering n,1000,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,g,4,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,NTL9,markov lag time,100,ns,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals, alpha-dihedrals",,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,TICA lag,40,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,TICA scaling,commute-map,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,TICA m,50,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,clsutering method,k-means,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,clustering n,1000,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,g,4,,TRUE,FALSE,FALSE
-,A_Data-Dri2018,WW-domain,markov lag time,100,ns,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,feature,"alpha-distances, alpha-reciprocal-distances, alpha-dihedrals",,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,clustering n,100,,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,Markov lag time,60,ns,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,g,2,,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,TICA scaling,commute-map,,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,TICA m,95pc_KV,,TRUE,FALSE,FALSE
-,Learning_E2018,WW-domain,TICA lag,,,TRUE,FALSE,FALSE
-,Nonlinear_2019,WW-domain,feature,alpha-distances,,TRUE,FALSE,FALSE
-,Nonlinear_2019,WW-domain,Markov lag time,400,ns,TRUE,FALSE,FALSE
-,Nonlinear_2019,WW-domain,TICA m,,,TRUE,FALSE,FALSE
-,Nonlinear_2019,WW-domain,TICA lag,,,TRUE,FALSE,FALSE
-,Nonlinear_2019,WW-domain,TICA scaling,,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,feature,backbone-dihedrals,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,TICA m,10,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,clustering method,k-means,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,clustering n,500,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,markov lag time,,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,TICA lag,,,TRUE,FALSE,FALSE
-,Examining_2018,Villin,TICA scaling,,,TRUE,FALSE,FALSE
-Generating new data,HTMD:_High2016,Villin,feature,contact-map,,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,TICA lag,2,ns,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,TICA m,10,,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,TICA scaling,,,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,clustering method,minibatch k-means,,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,clustering n,1000,ns,TRUE,FALSE,FALSE
-,HTMD:_High2016,Villin,markov lag time,30,,TRUE,FALSE,FALSE
-,Variationa2018,Villin,feature,alpha-distances,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,TICA lag,44,ns,TRUE,FALSE,TRUE
-,Variationa2018,Villin,TICA m,4,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,clustering n,125,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Variationa2018,Villin,error method,bootstrapping,,TRUE,FALSE,TRUE
-,Variationa2018,Villin,bootstrap samples,100,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,clustering n,2000,,TRUE,FALSE,TRUE
-,Quantitati2018,Chignolin,markov lag time,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,clustering n,2000,,TRUE,FALSE,TRUE
-,Quantitati2018,Trp-cage,markov lag time,200,ns,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,clustering n,1000,,TRUE,FALSE,TRUE
-,Quantitati2018,BBA,markov lag time,1,ns,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,TICA stride,6,ns,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,clustering n,2000,,TRUE,FALSE,TRUE
-,Quantitati2018,WW-domain,markov lag time,1,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,clustering n,926,,TRUE,FALSE,TRUE
-,Quantitati2018,Protein B,markov lag time,200,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,clustering n,1000,,TRUE,FALSE,TRUE
-,Quantitati2018,Homeodomain,markov lag time,10,ns,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,feature,"heavy-distances, heavy-reciprocal-distances, all-dihedrals",,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,TICA stride,0.2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,TICA lag,20,ns,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,clustering n,2000,,TRUE,FALSE,TRUE
-,Quantitati2018,a3D,markov lag time,2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,feature,heavy-distances,,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,TICA stride,2,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,TICA lag,100,ns,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,TICA m,,,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,TICA scaling,commute-map,,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,clustering method,k-means,,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,clustering n,934,,TRUE,FALSE,TRUE
-,Quantitati2018,Lambda-repressor,markov lag time,200,ns,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,feature,alpha-angles,,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,TICA lag,22,ns,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,clustering method,k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,clustering n,453,,TRUE,FALSE,TRUE
-,Optimized_2016,a3D,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,feature,alpha-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,TICA lag,46,ns,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,clustering method,minibatch k-medoids,,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,clustering n,102,,TRUE,FALSE,TRUE
-,Optimized_2016,BBA,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,feature,alpha-logistic-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,TICA lag,300,ns,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,TICA m,7,,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,clustering n,40,,TRUE,FALSE,TRUE
-,Optimized_2016,BBL,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,feature,alpha-logistic-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,TICA lag,22,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,TICA m,6,,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,clustering method,k-centers,,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,clustering n,892,,TRUE,FALSE,TRUE
-,Optimized_2016,Chignolin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,feature,alpha-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,TICA lag,44,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,TICA m,3,,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,clustering n,697,,TRUE,FALSE,TRUE
-,Optimized_2016,Homeodomain,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,feature,alpha-logistic-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,TICA lag,288,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,clustering method,minibatch k-medoids,,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,clustering n,343,,TRUE,FALSE,TRUE
-,Optimized_2016,Lambda-repressor,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,feature,contact-map,,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,TICA lag,172,ns,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,clustering n,176,,TRUE,FALSE,TRUE
-,Optimized_2016,NTL9,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,feature,alpha-angles,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,TICA lag,38,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,clustering n,350,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein B,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,feature,alpha-logistic-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,TICA lag,52,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,TICA m,2,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,clustering method,k-centers,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,clustering n,390,,TRUE,FALSE,TRUE
-,Optimized_2016,Protein G,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,feature,alpha-angles,,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,TICA lag,64,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,TICA m,8,,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,clustering method,minibatch k-medoids,,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,clustering n,240,,TRUE,FALSE,TRUE
-,Optimized_2016,Trp-cage,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,feature,alpha-angles,,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,TICA lag,22,ns,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,TICA m,9,,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,clustering method,minibatch k-medoids,,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,clustering n,654,,TRUE,FALSE,TRUE
-,Optimized_2016,Villin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,feature,alpha-distances,,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,TICA lag,30,ns,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,TICA m,6,,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,TICA scaling,none,,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,clustering n,769,,TRUE,FALSE,TRUE
-,Optimized_2016,WW-domain,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,feature,backbone-dihedrals,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,TICA lag,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,TICA m,all,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,clustering method,ward,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,clustering n,89,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Villin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,feature,backbone-dihedrals,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,TICA lag,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,TICA m,all,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,clustering method,ward,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,clustering n,192,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Trp-cage,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,feature,backbone-dihedrals,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,TICA lag,50,ns,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,TICA m,all,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,clustering method,ward,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,clustering n,76,,TRUE,FALSE,TRUE
-,Ward_Clust2017,Protein G,markov lag time,50,ns,TRUE,FALSE,TRUE
-Compares with different forcefield - reporting both here. ,A_Minimum_2018,Chignolin,forcefield,CHARMM22/mTIP3P,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,feature,alpha-dihedrals,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA lag,128,ns,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA m,all,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,clustering n,704,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,forcefield,Amber-FB15/TIP3-FB,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,feature,alpha-dihedrals,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA lag,20,ns,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA m,all,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,markov lag time,20,ns,TRUE,FALSE,TRUE
-,A_Minimum_2018,Chignolin,clustering n,157,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,feature,heavy-distances,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,TICA lag,,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,TICA m,,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,TICA scaling,,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,clustering method,k-means,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,clustering n,50,,TRUE,FALSE,TRUE
-,VAMPnets_f2018,NTL9,markov lag time,,,TRUE,FALSE,TRUE
-"different data, with dye molecule",Linking_ti2018,WW-domain,feature,"fraction of native contacts, FRET efficiency",,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,TICA lag,,,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,TICA m,,,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,TICA scaling,,,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,clustering method,regular grid,,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,clustering n,87,,TRUE,FALSE,FALSE
-,Linking_ti2018,WW-domain,markov lag time,200,ns,TRUE,FALSE,FALSE
- (CLN025),Modeling_t2017,Chignolin,feature,alpha-dihedrals,,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,TICA lag,128,ns,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,TICA m,14,,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,TICA scaling,kinetic-map,,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,clustering n,704,,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,markov lag time,50,ns,TRUE,FALSE,TRUE
-,Modeling_t2017,Chignolin,stride,2,ns,TRUE,FALSE,TRUE
-chooses which residue pairs,Maximizing2018,Lambda-repressor,feature,heavy-distances,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,TICA lag,,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,TICA m,,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,TICA scaling,,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,clustering n,200,,TRUE,FALSE,TRUE
-,Maximizing2018,Lambda-repressor,markov lag time,60,ns,TRUE,FALSE,TRUE
-different dataset,Maximizing2018,Villin,feature,heavy-distances,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,TICA lag,,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,TICA m,,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,TICA scaling,,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,clustering method,minibatch k-means,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,clustering n,200,,TRUE,FALSE,TRUE
-,Maximizing2018,Villin,markov lag time,1,ns,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,feature,"backbone-dihedrals, alpha-distances",,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,TICA lag,140,ns,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,TICA m,5,,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,TICA scaling,,,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,clustering method,k-means,,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,clustering n,200,,TRUE,FALSE,TRUE
-,High-Resol2019,Trp-cage,markov lag time,20,ns,TRUE,FALSE,TRUE
-,Transfer_L2018,WW-domain,feature,backbone-dihedrals,,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,TICA lag,50,ns,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,TICA m,15,,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,TICA scaling,,,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,markov lag time,50,ns,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,clustering method,,,TRUE,FALSE,FALSE
-,Transfer_L2018,WW-domain,clustering n,200,,TRUE,FALSE,FALSE
-,Adaptive_M2020,WW-domain,feature,"alpha-distances, beta-distances",,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,TICA lag,,,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,TICA m,8,,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,TICA scaling,,,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,markov lag time,100,ns,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,clustering method,k-centers,,TRUE,FALSE,TRUE
-,Adaptive_M2020,WW-domain,clustering n,1000,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,feature,"alpha-distances, beta-distances",,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,TICA lag,,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,TICA m,6,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,TICA scaling,,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,markov lag time,200,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,clustering method,k-centers,,TRUE,FALSE,TRUE
-,Adaptive_M2020,NTL9,clustering n,1000,,TRUE,FALSE,TRUE
-, SAXS-guide2018,Villin,feature,RMSD,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,TICA lag,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,TICA m,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,TICA scaling,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,markov lag time,,ns,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,clustering method,k-centers,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Villin,clustering n,500,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,feature,"backbone-dihedrals, chi1-dihedral",,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,TICA lag,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,TICA m,100,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,TICA scaling,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,markov lag time,50,ns,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,clustering method,k-means,,TRUE,FALSE,FALSE
-, SAXS-guide2018,Protein G,clustering n,500,,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,feature,"backbone-dihedrals, chi1-dihedral",,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,TICA lag,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,TICA m,100,,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,TICA scaling,,,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,markov lag time,50,ns,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,clustering method,k-means,,TRUE,FALSE,FALSE
-, SAXS-guide2018,a3D,clustering n,500,,TRUE,FALSE,FALSE
-Different data,Choice_of_2018,Lambda-repressor,feature,"backbone-positions, beta-positions",,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,TICA lag,,,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,TICA m,,,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,TICA scaling,,,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,markov lag time,5,ns,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,clustering method,k-centers,,TRUE,FALSE,FALSE
-,Choice_of_2018,Lambda-repressor,clustering n,clusters had 3A radius,,TRUE,FALSE,FALSE
+"Note	Citation	Protein	Hyperparameter	Value	units	MSM?	Novel?	Uses optimisation	",,,
+"	Computing_2019	Villin	TICA lag	50	ns	TRUE	FALSE	FALSE	",,,"	Computing_2019	Villin	TICA lag	50	ns	TRUE	FALSE	FALSE	"
+"	Computing_2019	Villin	TICA m	2		TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	feature	all-dihedrals		TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	clustering method	regular grid		TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	clustering n	625		TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	markov lag time	40	ns	TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	g	3		TRUE	FALSE	FALSE	",,,
+"	Computing_2019	Villin	coarse-graining	PCCA		TRUE	FALSE	FALSE	",,,
+"	Data-drive2018	NTL9	feature	heavy-distances		FALSE	TRUE	FALSE	",,,
+"	Data-drive2018	NTL9	markov lag time	10	ns	FALSE	TRUE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	feature	""heavy-distances", heavy-reciprocal-distances, all-dihedrals," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	NTL9	TICA lag	100	ns	TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	TICA scaling	commute-map		TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	TICA m	50		TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	clsutering method	k-means		TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	clustering n	1000		TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	g	4		TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	NTL9	markov lag time	100	ns	TRUE	FALSE	FALSE	",,,
+"	A_Data-Dri2018	WW-domain	feature	""heavy-distances", heavy-reciprocal-distances, all-dihedrals," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	TICA lag	40		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	TICA scaling	commute-map		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	TICA m	50		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	clsutering method	k-means		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	clustering n	1000		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	g	4		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Data-Dri2018	WW-domain	markov lag time	100	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	feature	""alpha-distances", alpha-reciprocal-distances," alpha-dihedrals""		TRUE	FALSE	FALSE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	clustering n	100		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	Markov lag time	60	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	g	2		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	TICA scaling	commute-map		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	TICA m	95pc_KV		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Learning_E2018	WW-domain	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Nonlinear_2019	WW-domain	feature	alpha-distances		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Nonlinear_2019	WW-domain	Markov lag time	400	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Nonlinear_2019	WW-domain	TICA m			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Nonlinear_2019	WW-domain	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Nonlinear_2019	WW-domain	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	feature	backbone-dihedrals		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	TICA m	10		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	clustering method	k-means		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	clustering n	500		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	markov lag time	50	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Examining_2018	Villin	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"Generating new data	HTMD:_High2016	Villin	feature	contact-map		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	TICA lag	2	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	TICA m	10		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	clustering method	minibatch k-means		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	clustering n	1000	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	HTMD:_High2016	Villin	markov lag time	30	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	feature	alpha-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	TICA lag	44	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	TICA m	4		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	clustering n	125		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	error method	bootstrapping		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Variationa2018	Villin	bootstrap samples	100		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	clustering n	2000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Chignolin	markov lag time	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	clustering n	2000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Trp-cage	markov lag time	200	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	clustering n	1000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	BBA	markov lag time	1	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	TICA stride	6	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	clustering n	2000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	WW-domain	markov lag time	1	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	clustering n	926		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Protein B	markov lag time	200	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	clustering n	1000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Homeodomain	markov lag time	10	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	feature	""heavy-distances", heavy-reciprocal-distances," all-dihedrals""		TRUE	FALSE	TRUE	"," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	TICA stride	0.2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	clustering n	2000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	a3D	markov lag time	2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	feature	heavy-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	TICA stride	2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	TICA lag	100	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	TICA scaling	commute-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	clustering n	934		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Quantitati2018	Lambda-repressor	markov lag time	200	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	feature	alpha-angles		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	TICA lag	22	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	clustering n	453		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	a3D	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	feature	alpha-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	TICA lag	46	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	clustering method	minibatch k-medoids		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	clustering n	102		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBA	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	feature	alpha-logistic-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	TICA lag	300	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	TICA m	7		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	clustering n	40		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	BBL	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	feature	alpha-logistic-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	TICA lag	22	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	TICA m	6		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	clustering method	k-centers		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	clustering n	892		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Chignolin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	feature	alpha-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	TICA lag	44	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	TICA m	3		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	clustering n	697		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Homeodomain	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	feature	alpha-logistic-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	TICA lag	288	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	clustering method	minibatch k-medoids		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	clustering n	343		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Lambda-repressor	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	feature	contact-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	TICA lag	172	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	clustering n	176		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	NTL9	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	feature	alpha-angles		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	TICA lag	38	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	clustering n	350		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein B	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	feature	alpha-logistic-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	TICA lag	52	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	TICA m	2		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	clustering method	k-centers		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	clustering n	390		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Protein G	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	feature	alpha-angles		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	TICA lag	64	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	TICA m	8		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	clustering method	minibatch k-medoids		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	clustering n	240		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Trp-cage	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	feature	alpha-angles		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	TICA lag	22	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	TICA m	9		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	clustering method	minibatch k-medoids		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	clustering n	654		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	Villin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	feature	alpha-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	TICA lag	30	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	TICA m	6		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	TICA scaling	none		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	clustering n	769		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Optimized_2016	WW-domain	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	feature	backbone-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	TICA lag	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	TICA m	all		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	clustering method	ward		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	clustering n	89		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Villin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	feature	backbone-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	TICA lag	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	TICA m	all		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	clustering method	ward		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	clustering n	192		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Trp-cage	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	feature	backbone-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	TICA lag	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	TICA m	all		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	clustering method	ward		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	clustering n	76		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Ward_Clust2017	Protein G	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"Compares with different forcefield - reporting both here. 	A_Minimum_2018	Chignolin	forcefield	CHARMM22/mTIP3P		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	feature	alpha-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA lag	128	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA m	all		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	clustering n	704		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	forcefield	Amber-FB15/TIP3-FB		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	feature	alpha-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA lag	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA m	all		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	markov lag time	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	A_Minimum_2018	Chignolin	clustering n	157		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	feature	heavy-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	TICA lag			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	clustering n	50		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	VAMPnets_f2018	NTL9	markov lag time			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"different data	 with dye molecule	Linking_ti2018	WW-domain	feature	""fraction of native contacts"," FRET efficiency""		TRUE	FALSE	FALSE",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	TICA m			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	clustering method	regular grid		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	clustering n	87		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Linking_ti2018	WW-domain	markov lag time	200	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+" (CLN025)	Modeling_t2017	Chignolin	feature	alpha-dihedrals		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	TICA lag	128	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	TICA m	14		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	TICA scaling	kinetic-map		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	clustering n	704		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	markov lag time	50	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Modeling_t2017	Chignolin	stride	2	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"chooses which residue pairs	Maximizing2018	Lambda-repressor	feature	heavy-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	TICA lag			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	clustering n	200		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Lambda-repressor	markov lag time	60	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"different dataset	Maximizing2018	Villin	feature	heavy-distances		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	TICA lag			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	TICA m			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	clustering method	minibatch k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	clustering n	200		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Maximizing2018	Villin	markov lag time	1	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	feature	""backbone-dihedrals"," alpha-distances""		TRUE	FALSE	TRUE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	TICA lag	140	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	TICA m	5		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	clustering method	k-means		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	clustering n	200		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	High-Resol2019	Trp-cage	markov lag time	20	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	feature	backbone-dihedrals		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	TICA lag	50	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	TICA m	15		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	markov lag time	50	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	clustering method			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Transfer_L2018	WW-domain	clustering n	200		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	feature	""alpha-distances"," beta-distances""		TRUE	FALSE	TRUE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	TICA lag			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	TICA m	8		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	markov lag time	100	ns	TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	clustering method	k-centers		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	WW-domain	clustering n	1000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	feature	""alpha-distances"," beta-distances""		TRUE	FALSE	TRUE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	TICA lag			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	TICA m	6		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	TICA scaling			TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	markov lag time	200		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	clustering method	k-centers		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Adaptive_M2020	NTL9	clustering n	1000		TRUE	FALSE	TRUE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	feature	RMSD		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	TICA m			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	markov lag time	30	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	clustering method	k-centers		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Villin	clustering n	500		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	feature	""backbone-dihedrals"," chi1-dihedral""		TRUE	FALSE	FALSE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	TICA m	100		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	markov lag time	50	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	clustering method	k-means		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	Protein G	clustering n	500		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	feature	""backbone-dihedrals"," chi1-dihedral""		TRUE	FALSE	FALSE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	TICA m	100		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	markov lag time	50	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	clustering method	k-means		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	 SAXS-guide2018	a3D	clustering n	500		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"Different data	Choice_of_2018	Lambda-repressor	feature	""backbone-positions"," beta-positions""		TRUE	FALSE	FALSE	",," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	TICA lag			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	TICA m			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	TICA scaling			TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	markov lag time	5	ns	TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	clustering method	k-centers		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"
+"	Choice_of_2018	Lambda-repressor	clustering n	clusters had 3A radius		TRUE	FALSE	FALSE	",,," alpha-dihedrals""		TRUE	FALSE	FALSE	"

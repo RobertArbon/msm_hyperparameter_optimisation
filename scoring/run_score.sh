@@ -1,8 +1,8 @@
 #!/bin/bash
 
 export protein=$1
-export first=0
-export last=99
+export first=$2
+export last=$3
 
 conda activate msmsense
 export MKL_NUM_THREADS=1

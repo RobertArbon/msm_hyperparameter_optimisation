@@ -3,6 +3,7 @@
 feature_selection/ 
 .idea
 *.h5
+*.hdf
 *.mp4
 *.gif
 *.pdb
@@ -10,6 +11,9 @@ feature_selection/
 *.npy
 *.pkl
 *.pdf
+*.pm
+*.npz
+*.p
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
